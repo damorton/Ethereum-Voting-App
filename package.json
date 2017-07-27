@@ -4,7 +4,7 @@
   "description": "Frontend example using truffle v3",
   "scripts": {
     "lint": "eslint ./",
-    "build": "webpack -p --config ./webpack.config.js --progress",
+    "build": "webpack",
     "dev": "webpack-dev-server",
     "start": "node server.js"
   },
@@ -34,5 +34,8 @@
     "web3": "^0.18.2",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {
+    "express": "^4.15.3"
   }
 }
