@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint ./",
     "build": "webpack",
-    "build-contracts" : "truffle compile",
+    "build-contracts": "truffle compile",
     "dev": "webpack-dev-server",
     "start": "node server.js",
     "heroku-postbuild": "npm run build-contracts && webpack --config ./webpack.config.js --progress"
@@ -29,13 +29,14 @@
     "eslint-plugin-mocha": "^4.8.0",
     "eslint-plugin-promise": "^3.0.0",
     "eslint-plugin-standard": "^2.0.0",
+    "express": "^4.15.3",
     "html-webpack-plugin": "^2.28.0",
     "json-loader": "^0.5.4",
     "style-loader": "^0.13.1",
+    "truffle": "^3.4.6",
     "truffle-contract": "^1.1.11",
     "web3": "^0.18.2",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0",
-    "express": "^4.15.3"
+    "webpack-dev-server": "^2.3.0"
   }
 }
