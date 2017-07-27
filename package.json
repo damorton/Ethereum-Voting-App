@@ -1,5 +1,5 @@
 {
-  "name": "Ethereum Voting App",
+  "name": "eth-voting-app",
   "version": "1.0.0",
   "description": "Frontend example for Ethereum Voting App using truffle",
   "scripts": {
