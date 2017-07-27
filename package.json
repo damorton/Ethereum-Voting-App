@@ -5,9 +5,10 @@
   "scripts": {
     "lint": "eslint ./",
     "build": "webpack",
+    "build-contracts" : "truffle compile",
     "dev": "webpack-dev-server",
     "start": "node server.js",
-    "heroku-postbuild": "webpack --config ./webpack.config.js --progress"
+    "heroku-postbuild": "run build-contracts && webpack --config ./webpack.config.js --progress"
   },
   "author": "Douglas von Kohorn",
   "license": "MIT",
