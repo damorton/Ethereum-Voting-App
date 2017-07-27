@@ -8,7 +8,7 @@
     "build-contracts" : "truffle compile",
     "dev": "webpack-dev-server",
     "start": "node server.js",
-    "heroku-postbuild": "run build-contracts && webpack --config ./webpack.config.js --progress"
+    "heroku-postbuild": "npm run build-contracts && webpack --config ./webpack.config.js --progress"
   },
   "author": "Douglas von Kohorn",
   "license": "MIT",
