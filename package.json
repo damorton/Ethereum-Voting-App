@@ -3,11 +3,10 @@
   "version": "0.0.2",
   "description": "Frontend example using truffle v3",
   "scripts": {
-    "lint": "eslint ./",
-    "build": "webpack",
+    "lint": "eslint ./",    
     "dev": "webpack-dev-server",
     "start": "node server.js",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "author": "Douglas von Kohorn",
   "license": "MIT",
