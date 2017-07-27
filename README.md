@@ -2,6 +2,8 @@
 
 Very good introduction to Ethereum https://medium.com/@mvmurthy/ethereum-for-web-developers-890be23d1d0c
 
+App deployed to Heroku https://ethereum-voting-app.herokuapp.com/ make sure to install MetaMask, create an account, and request some Ether from here https://www.reddit.com/r/ethdev/comments/61zdn8/if_you_need_some_ropsten_testnet_ethers/
+
 # Notes
 
 - While trying to use truffle to migrate the contracts to the test network using `Geth` there were issues with wallet authentication. Make sure to unlock the default Geth account, check that your new account is stored in `web3.eth.accounts[0]` otherwise it will not be used during the migration. You can delete wallets in the keystore file for your Geth node, this is permanent.

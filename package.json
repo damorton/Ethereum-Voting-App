@@ -1,7 +1,7 @@
 {
-  "name": "truffle-init-webpack",
-  "version": "0.0.2",
-  "description": "Frontend example using truffle v3",
+  "name": "Ethereum Voting App",
+  "version": "1.0.0",
+  "description": "Frontend example for Ethereum Voting App using truffle",
   "scripts": {
     "lint": "eslint ./",
     "build": "webpack",
@@ -10,7 +10,7 @@
     "start": "node server.js",
     "heroku-postbuild": "webpack --config ./webpack.config.js --progress"
   },
-  "author": "Douglas von Kohorn",
+  "author": "David Morton",
   "license": "MIT",
   "dependencies": {
     "babel-cli": "^6.22.2",
