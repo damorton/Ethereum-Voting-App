@@ -49,6 +49,7 @@ $(document).ready(function(){
   Voting.setProvider(web3.currentProvider);
 
   populateCandidates();
+  lookUpVoterInfo();
 });
 
 function populateCandidates() {
@@ -101,10 +102,9 @@ function populateTokenData() {
   });
 }
 
-window.lookupVoterInfo = function() {
-  let address = $("#voter-info").val();
+function lookUpVoterInfo() {
   Voting.deployed().then(function(contractInstance) {
-    contractInstance.voterDetails.call(address).then(function(v) {
+    contractInstance.voterDetails.call(web3.eth.accounts[0]).then(function(v) {
       $("#tokens-bought").html("Total Tokens bought: " + v[0].toString());
       let votesPerCandidate = v[1];
       $("#votes-cast").empty();
@@ -126,7 +126,8 @@ window.buyTokens = function() {
       $("#buy-msg").html("");
       web3.eth.getBalance(contractInstance.address, function(error, result) {
         populateTokenData();
-        $("#buy").val("");
+        lookUpVoterInfo();
+        $("#buy").val("");        
       });
     })
   });
