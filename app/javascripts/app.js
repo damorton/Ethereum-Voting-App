@@ -110,7 +110,7 @@ function refreshVoterInfo() {
       // load voters total tokens bought count
       let totalTokensBought = v[0];
       let votesPerCandidate = v[1];
-      $("#tokens-bought").html("Total Tokens bought: " + totalTokensBought.toString());  
+      $("#tokens-bought").html("Tokens bought: " + totalTokensBought.toString());  
       let allCandidates = Object.keys(candidates);      
       let remainingVotes = totalTokensBought;
       
@@ -119,7 +119,7 @@ function refreshVoterInfo() {
         $("#candidate-" + i + "-vote-count").html(" (&#8593;" + votesPerCandidate[i].toString() + ")");          
         remainingVotes -= votesPerCandidate[i];
       }
-      $("#votes-remaining").html("Votes Remainaing: " + remainingVotes);
+      $("#votes-remaining").html("Tokens Remainaing: " + remainingVotes);
     });
   });
 }
