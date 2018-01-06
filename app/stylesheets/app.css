@@ -1,10 +1,5 @@
-body {
-  font-family: "Open Sans", sans-serif;
-}
-
-label {
-  display: inline-block;
-  width: 100px;
+.header {
+  padding-top: 32px;
 }
 
 .black {
@@ -20,5 +15,10 @@ label {
 }
 
 .footer {
-  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+#msg, #buy-msg {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

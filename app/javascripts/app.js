@@ -25,31 +25,31 @@ window.voteForCandidate = function(candidate) {
 
     Voting.deployed().then(function(contractInstance){
       contractInstance.voteForCandidate(candidateName, voteTokens, {gas: 140000, from: web3.eth.accounts[0]}).then(function(){
-        let div_id = candidates[candidateName];
+        let candidateId = candidates[candidateName];
         return contractInstance.totalVotesFor.call(candidateName).then(function(v){
-          $("#" + div_id).html(v.toString());
+          $("#" + candidateId).html(v.toString() + "<span id='" + candidateId + "-vote-count' class='text-success'></span>");
           $("#msg").html("");
+          refreshVoterInfo();
         });
       });
-    });
+    });    
   } catch (err){
     console.log(err);
   }
 }
 
-$(document).ready(function(){
+$(document).ready(function(){  
   if(typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source like MetaMask");
     window.web3 = new Web3(web3.currentProvider);
   } else {
     console.warn("No web3 detected. Falling back to http://localhost:8545. Remove this fallback and use MetaMask for production.");
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));    
   }
 
   Voting.setProvider(web3.currentProvider);
 
-  populateCandidates();
-  lookUpVoterInfo();
+  populateCandidates();  
 });
 
 function populateCandidates() {
@@ -78,7 +78,7 @@ function populateCandidateVotes(){
     let name = candidateNames[i];
     Voting.deployed().then(function(contractInstance){
       contractInstance.totalVotesFor.call(name).then(function(v){
-        $("#" + candidates[name]).html(v.toString());
+        $("#" + candidates[name]).html(v.toString() + "<span id='" + candidates[name] + "-vote-count' class='text-success'></span>");
       });
     });
   }
@@ -100,19 +100,26 @@ function populateTokenData() {
           $("#contract-balance").html(web3.fromWei(result.toString()) + " Ether");
         });
   });
+  refreshVoterInfo();
 }
 
-function lookUpVoterInfo() {
+function refreshVoterInfo() {
   Voting.deployed().then(function(contractInstance) {
     contractInstance.voterDetails.call(web3.eth.accounts[0]).then(function(v) {
-      $("#tokens-bought").html("Total Tokens bought: " + v[0].toString());
+      
+      // load voters total tokens bought count
+      let totalTokensBought = v[0];
       let votesPerCandidate = v[1];
-      $("#votes-cast").empty();
-      $("#votes-cast").append("Votes cast per candidate: <br>");
-      let allCandidates = Object.keys(candidates);
+      $("#tokens-bought").html("Total Tokens bought: " + totalTokensBought.toString());  
+      let allCandidates = Object.keys(candidates);      
+      let remainingVotes = totalTokensBought;
+      
+      // calculate votes per candidate
       for(let i=0; i < allCandidates.length; i++) {
-        $("#votes-cast").append(allCandidates[i] + ": " + votesPerCandidate[i] + "<br>");
+        $("#candidate-" + i + "-vote-count").html(" (&#8593;" + votesPerCandidate[i].toString() + ")");          
+        remainingVotes -= votesPerCandidate[i];
       }
+      $("#votes-remaining").html("Votes Remainaing: " + remainingVotes);
     });
   });
 }
@@ -126,7 +133,6 @@ window.buyTokens = function() {
       $("#buy-msg").html("");
       web3.eth.getBalance(contractInstance.address, function(error, result) {
         populateTokenData();
-        lookUpVoterInfo();
         $("#buy").val("");        
       });
     })

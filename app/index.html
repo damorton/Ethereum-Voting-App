@@ -3,7 +3,7 @@
 <head>
   <title>Hello World DApp</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+  <link href='https://bootswatch.com/4/materia/bootstrap.min.css' rel='stylesheet' type='text/css'>
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
   <script src="app.js"></script>  
   <style>
@@ -14,30 +14,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">  
 </head>
 <body class="container">
-  <div class="text-center">
+  <div class="text-center header">
     <h1>Ethereum Token Voting</h1>    
     <h4>(Ropsten Test Net)</h4>
     <em>Buy tokens using Ether to vote for your favourite candidates</em>    
-  </div>  
+  </div>    
   <hr>
-  <div class="row center-block">
-      <div class="voter-details row text-left">
-        <div id="tokens-bought" class="col-md-12"></div>
-        <div id="votes-cast" class="col-md-12"></div>
-      </div>
-  </div>
   <div class="row">      
-    <div class="col-sm-12">
+    <div class="col-sm-9">
       <h3>How to use the app</h3>
       <strong>Step 1</strong>: Install the <a href="https://metamask.io/" target="_blank">metamask plugin</a> and create an account on Ropsten Test Network and buy some Ether from the faucet.
       <br>
       <strong>Step 2</strong>: Purchase tokens below by entering the total number of tokens you would like to buy.
       <br>
       <strong>Step 3</strong>: Vote for candidates by entering their name and no. of tokens to vote with.
+    </div> 
+    <div class="col-sm-3">
+      <h2>Voter Info</h2>
+      <div class="voter-details">
+        <div id="tokens-bought" class="text-warning"></div>
+        <hr>
+        <div id="votes-remaining" class="text-success"></div>
+      </div>             
     </div>
   </div>
+  <hr>
   <div class="row">
-    <div class="col-sm-7">
+    <div class="col-sm-9">
       <h2>Candidates</h2>
       <div class="table-responsive">
         <table class="table table-bordered">
@@ -50,57 +53,60 @@
           <tbody id="candidate-rows">
         </table>
       </div>
-    </div>
-    <div class="col-sm-offset-1 col-sm-4">
-      <h2>Tokens</h2>
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <tbody><tr>
-            <th>Tokens Info</th>
-            <th>Value</th>
-          </tr>
-          <tr>
-            <td>Tokens For Sale</td>
-            <td id="tokens-total"></td>
-          </tr>
-          <tr>
-            <td>Tokens Sold</td>
-            <td id="tokens-sold"></td>
-          </tr>
-          <tr>
-            <td>Price Per Token</td>
-            <td id="tokens-cost"></td>
-          </tr>
-          <tr>
-            <td>Balance in the contract</td>
-            <td id="contract-balance"></td>
-          </tr>
-        </tbody></table>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-      <div class="col-sm-7 form-inline">
+    </div>    
+    <div class="col-sm-3">
         <h2>Vote for Candidate</h2>
-        <div id="msg"></div>
-        <div class="form-group text-right">            
-          <label for="candidate">Candidate:</label>
+        <div class="form-group">            
           <input type="text" id="candidate" class="form-control" placeholder="Candidate name">                
         </div>
-        <div class="form-group text-right">     
-          <label for="candidate">Votes:</label>    
+        <div class="form-group">     
           <input type="text" id="vote-tokens" class="form-control" placeholder="# of votes">                
         </div>
-        <a href="#" onclick="voteForCandidate(); return false;" class="btn btn-primary">Vote</a>
+        <a href="#" onclick="voteForCandidate(); return false;" class="btn btn-primary btn-sm">Vote</a>        
+        <div id="msg" class="text-info"></div>                
+    </div>       
+  </div>  
+  <hr>
+  <div class="row">         
+      <div class="col-sm-9">                     
+          <h2>Tokens</h2>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Token Info</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>              
+              <tr>
+                <td>Tokens For Sale</td>
+                <td id="tokens-total"></td>
+              </tr>
+              <tr>
+                <td>Tokens Sold</td>
+                <td id="tokens-sold"></td>
+              </tr>
+              <tr>
+                <td>Price Per Token</td>
+                <td id="tokens-cost"></td>
+              </tr>
+              <tr>
+                <td>Balance in the contract</td>
+                <td id="contract-balance"></td>
+              </tr>
+            </tbody>
+            </table>
+          </div> 
       </div>
-      <div class="col-sm-offset-1 col-sm-4">
-        <div class="form-inline">
+      <div class="col-sm-3">
           <h2>Purchase Tokens</h2>
-          <div id="buy-msg"></div>
-          <input type="text" id="buy" class="form-control" placeholder="# of tokens">&nbsp;
-          <a href="#" onclick="buyTokens(); return false;" class="btn btn-primary">Buy</a>
-        </div>        
-      </div>
+          <div class="form-group">
+            <input type="text" id="buy" class="form-control" placeholder="# of tokens">            
+          </div>
+          <a href="#" onclick="buyTokens(); return false;" class="btn btn-primary btn-sm">Buy</a>
+          <div id="buy-msg" class="text-info"></div>                              
+        </div>   
   </div>
   <hr>
   <div class="footer text-center">
