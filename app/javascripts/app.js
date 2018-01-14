@@ -32,24 +32,24 @@ window.voteForCandidate = function(candidate) {
           refreshVoterInfo();
         });
       });
-    });    
+    });
   } catch (err){
     console.log(err);
   }
 }
 
-$(document).ready(function(){  
+$(document).ready(function(){
   if(typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source like MetaMask");
     window.web3 = new Web3(web3.currentProvider);
   } else {
     console.warn("No web3 detected. Falling back to http://localhost:8545. Remove this fallback and use MetaMask for production.");
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));    
+    window.web3 = new Web3(new Web3.providers.HttpProvider("https://localhost:8545"));    
   }
 
   Voting.setProvider(web3.currentProvider);
 
-  populateCandidates();  
+  populateCandidates();
 });
 
 function populateCandidates() {
@@ -106,17 +106,17 @@ function populateTokenData() {
 function refreshVoterInfo() {
   Voting.deployed().then(function(contractInstance) {
     contractInstance.voterDetails.call(web3.eth.accounts[0]).then(function(v) {
-      
+
       // load voters total tokens bought count
       let totalTokensBought = v[0];
       let votesPerCandidate = v[1];
-      $("#tokens-bought").html("Tokens bought: " + totalTokensBought.toString());  
-      let allCandidates = Object.keys(candidates);      
+      $("#tokens-bought").html("Tokens bought: " + totalTokensBought.toString());
+      let allCandidates = Object.keys(candidates);
       let remainingVotes = totalTokensBought;
-      
+
       // calculate votes per candidate
       for(let i=0; i < allCandidates.length; i++) {
-        $("#candidate-" + i + "-vote-count").html(" (&#8593;" + votesPerCandidate[i].toString() + ")");          
+        $("#candidate-" + i + "-vote-count").html(" (&#8593;" + votesPerCandidate[i].toString() + ")");
         remainingVotes -= votesPerCandidate[i];
       }
       $("#votes-remaining").html("Tokens Remainaing: " + remainingVotes);
@@ -133,7 +133,7 @@ window.buyTokens = function() {
       $("#buy-msg").html("");
       web3.eth.getBalance(contractInstance.address, function(error, result) {
         populateTokenData();
-        $("#buy").val("");        
+        $("#buy").val("");
       });
     })
   });
