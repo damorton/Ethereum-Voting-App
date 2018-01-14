@@ -44,7 +44,7 @@ $(document).ready(function(){
     window.web3 = new Web3(web3.currentProvider);
   } else {
     console.warn("No web3 detected. Falling back to http://localhost:8545. Remove this fallback and use MetaMask for production.");
-    window.web3 = new Web3(new Web3.providers.HttpProvider("https://localhost:8545"));    
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));    
   }
 
   Voting.setProvider(web3.currentProvider);
